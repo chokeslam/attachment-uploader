@@ -1,5 +1,9 @@
 {
-    "name": "formkit",
+    "name": "@lyrsfoft/luna-attachment",
+    "type": "module",
+    "main": "dist/index.js",
+    "module": "dist/index.js",
+    "types": "dist/index.d.ts",
     "private": true,
     "scripts": {
         "dev": "vite build --mode development --watch",
@@ -8,9 +12,13 @@
         "watch": "vite build --watch --mode development",
         "upgrade": "yarn up '**' -R"
     },
+    "dependencies": {
+        "sortablejs": "^1.15.6"
+    },
     "devDependencies": {
         "@microsoft/api-extractor": "^7.53.1",
         "@types/fs-extra": "^11.0.4",
+        "@types/sortablejs": "^1",
         "@vitejs/plugin-vue": "^6.0.1",
         "@windwalker-io/unicorn-next": "^0.1.6",
         "fs-extra": "^11.3.2",

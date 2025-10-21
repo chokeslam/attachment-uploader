@@ -25,14 +25,14 @@ return new /** 2022071508530001_Attachment */ class extends AbstractMigration {
             Attachment::class,
             function (Schema $schema) {
                 $schema->primary('id')->comment('ID');
-                $schema->varchar('type')->comment('類型');
-                $schema->integer('target_id')->comment('目標 ID');
-                $schema->varchar('title')->comment('檔案名稱');
+                $schema->varchar('type')->comment('Type');
+                $schema->integer('target_id')->comment('Target ID');
+                $schema->varchar('title')->comment('Title');
                 $schema->varchar('alt')->comment('Alt');
-                $schema->integer('size')->comment('檔案大小');
-                $schema->varchar('mime')->comment('媒體類型');
-                $schema->varchar('path')->comment('路徑');
-                $schema->text('description')->comment('內容');
+                $schema->integer('size')->comment('Size');
+                $schema->varchar('mime')->comment('Mime');
+                $schema->varchar('path')->comment('Path');
+                $schema->text('description')->comment('Description');
                 $schema->integer('ordering')->comment('Ordering');
                 $schema->datetime('created')->comment('Created Date');
                 $schema->datetime('modified')->comment('Modified Date');

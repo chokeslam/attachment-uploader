@@ -16,7 +16,6 @@
     ],
     "minimum-stability": "beta",
     "require": {
-        "php": ">=8.4.6",
         "myclabs/php-enum": "^1.8",
         "lyrasoft/luna": "^2.2"
     },
@@ -26,7 +25,9 @@
                 "Lyrasoft\\Attachment\\AttachmentPackage"
             ],
             "assets": {
-                "link": "assets/"
+                "vendors": {
+                    "@lyrasoft/luna-attachment": "portal:./vendor/lyrasoft/attachment/assets"
+                }
             },
             "modules": [
                 "src/Module"

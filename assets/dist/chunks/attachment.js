@@ -1,4 +1,4 @@
-import { useUnicorn, module, fadeOut, useUniDirective, injectCssToDocument } from "@windwalker-io/unicorn-next";
+import { useUnicorn, module, useTinymce, fadeOut, injectCssToDocument, useUniDirective } from "@windwalker-io/unicorn-next";
 const css = ".c-attachment-uploader {\n  position: relative;\n  display: inline-block;\n  width: 100%;\n  min-height: 100px;\n  cursor: pointer;\n}\n.c-attachment-uploader input {\n  position: absolute;\n  z-index: 2;\n  width: 100%;\n  margin: 0;\n  overflow: hidden;\n  opacity: 0;\n  height: 100%;\n  cursor: pointer;\n}\n.c-attachment-uploader input.hover + label {\n  border-color: #333;\n}\n.c-attachment-uploader label {\n  position: relative;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  z-index: 1;\n  padding: 0.375rem 0.75rem;\n  color: #495057;\n  background-color: #fff;\n  border: 1px solid #ced4da;\n  border-radius: 0.25rem;\n  height: 100px;\n  text-align: center;\n  display: flex;\n  align-items: center;\n  transition: border-color 0.3s;\n  cursor: pointer;\n}\n.c-attachment-uploader label > div {\n  display: inline-block;\n  width: 100%;\n}\n.c-attachment-uploader label::after {\n  content: none !important;\n}\n\n.c-attachment-list__item {\n  transition: all 0.3s ease-in-out;\n}\n.c-attachment-list__item.hide {\n  height: 0;\n  visibility: collapse;\n}";
 class AttachmentHandler {
   constructor(el, options) {
@@ -7,7 +7,7 @@ class AttachmentHandler {
     this.init(this.el, this.options);
   }
   init(el, options) {
-    const u = useUnicorn();
+    useUnicorn();
     const removeBtns = el.querySelectorAll("[data-remove-btn]");
     const insertBtns = el.querySelectorAll("[data-insert-btn]");
     let sortable = options.sortable;
@@ -37,7 +37,9 @@ class AttachmentHandler {
         if (fileName) {
           a.innerText = fileName;
         }
-        u.$ui.tinymce.get(btn.dataset.insertBtn || "#input-item-fulltext").insert(a.outerHTML);
+        useTinymce(btn.dataset.insertBtn || "#input-item-fulltext").then((tinymce) => {
+          tinymce.insert(a.outerHTML);
+        });
       });
     });
     removeBtns.forEach((btn) => {
@@ -53,11 +55,11 @@ class AttachmentHandler {
   }
 }
 async function init() {
+  injectCssToDocument(document, css);
   useUniDirective(
     "attachment-list",
     {
       mounted(el, { value }) {
-        injectCssToDocument(document, css);
         const options = JSON.parse(value);
         module(el, "attachment", (el2) => new AttachmentHandler(el2, options));
       }

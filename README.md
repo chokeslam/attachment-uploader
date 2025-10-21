@@ -81,9 +81,9 @@ php windwalker pkg:install lyrasoft/attachment -t migrations -t entity -t attach
 在需要使用的頁面 ts中載入
 
 ```js
-import { useFormkit } from '~vendor/lyrasoft/formkit/dist';
+import { useAttachment } from '~vendor/lyrasoft/formkit/dist';
 
-useFormkit();
+useAttachment();
 ```
 
 

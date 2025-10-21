@@ -18,7 +18,6 @@ export default defineConfig(({ mode }) => {
       lib: {
         entry: [
           'src/index.ts',
-          ...fs.globSync('src/fields/*.ts')
         ],
         name: 'Attachment',
         formats: ['es'],
@@ -56,14 +55,11 @@ export default defineConfig(({ mode }) => {
       cssCodeSplit: false,
     },
     plugins: [
-      // libInjectCss(),
       dts({
-        // entryRoot: './src/luna.ts',
         insertTypesEntry: true,
         outDir: 'dist',
         tsconfigPath: resolve('./tsconfig.json'),
         bundleTypes: true,
-        // rollupTypes: true
       }),
       {
         name: 'clear-files',

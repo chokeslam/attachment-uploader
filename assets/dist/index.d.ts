@@ -1,8 +1,8 @@
 declare class AttachmentHandler {
     protected el: HTMLElement;
-    protected options: Options;
-    constructor(el: HTMLElement, options: Options);
-    init(el: HTMLElement, options: Options): void;
+    protected options: AttachmentOptions;
+    constructor(el: HTMLElement, options: AttachmentOptions);
+    init(el: HTMLElement, options: AttachmentOptions): void;
 }
 
 declare interface AttachmentModule {
@@ -10,7 +10,7 @@ declare interface AttachmentModule {
     ready: typeof ready;
 }
 
-declare interface Options {
+declare interface AttachmentOptions {
     sortable?: boolean;
 }
 

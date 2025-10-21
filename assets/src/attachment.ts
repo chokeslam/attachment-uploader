@@ -1,17 +1,17 @@
-import { useUniDirective, useUnicorn, module, fadeOut, injectCssToDocument } from '@windwalker-io/unicorn-next';
+import { useUniDirective, useUnicorn, module, fadeOut, injectCssToDocument, useTinymce } from '@windwalker-io/unicorn-next';
 import css from '../scss/attachment.scss?inline';
 
-interface Options {
+export interface AttachmentOptions {
   sortable?: boolean;
 }
 
 export class AttachmentHandler {
 
-  constructor(protected el: HTMLElement, protected options: Options) {
+  constructor(protected el: HTMLElement, protected options: AttachmentOptions) {
     this.init(this.el, this.options);
   }
 
-  init(el: HTMLElement, options: Options) {
+  init(el: HTMLElement, options: AttachmentOptions) {
     const u = useUnicorn();
 
     const removeBtns = el.querySelectorAll<HTMLButtonElement>('[data-remove-btn]');
@@ -54,7 +54,10 @@ export class AttachmentHandler {
           a.innerText = fileName;
         }
 
-        u.$ui.tinymce.get(btn.dataset.insertBtn || '#input-item-fulltext').insert(a.outerHTML);
+        useTinymce(btn.dataset.insertBtn || '#input-item-fulltext')
+          .then((tinymce) => {
+            tinymce.insert(a.outerHTML);
+          });
       });
     });
 
@@ -76,13 +79,12 @@ export class AttachmentHandler {
 }
 
 async function init() {
+  injectCssToDocument(document, css);
+
   useUniDirective<HTMLElement>(
     'attachment-list',
     {
       mounted(el, { value }) {
-        injectCssToDocument(document, css);
-
-
         const options = JSON.parse(value)
 
         module(el, 'attachment', (el) => new AttachmentHandler(el, options))
