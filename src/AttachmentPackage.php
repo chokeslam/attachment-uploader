@@ -61,13 +61,21 @@ class AttachmentPackage extends AbstractPackage implements
         $installer->installModules(
             [
                 static::path("src/Entity/Attachment.php") => '@source/Entity',
-                static::path("src/Repository/AttachmentRepository.php") => '@source/Repository',
             ],
             [
                 'Lyrasoft\\Attachment\\Entity' => 'App\\Entity',
+            ],
+            ['entity']
+        );
+
+        $installer->installModules(
+            [
+                static::path("src/Repository/AttachmentRepository.php") => '@source/Repository',
+            ],
+            [
                 'Lyrasoft\\Attachment\\Repository' => 'App\\Repository',
             ],
-            ['entity', 'attachment_model']
+            ['attachment_model']
         );
     }
 }

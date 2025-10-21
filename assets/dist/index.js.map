@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sources":["../src/index.ts"],"sourcesContent":["import { AttachmentModule } from '~attachment/attachment';\n\nexport function useAttachment(): Promise<AttachmentModule> {\n  return import('~attachment/attachment');\n}\n"],"names":[],"mappings":"AAEO,SAAS,gBAA2C;AACzD,SAAO,OAAO,wBAAwB;AACxC;"}

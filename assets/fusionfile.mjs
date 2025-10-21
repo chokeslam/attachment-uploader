@@ -1,14 +1,8 @@
-/**
- * Part of Windwalker Fusion project.
- *
- * @copyright  Copyright (C) 2021 LYRASOFT.
- * @license    MIT
- */
-
-import fusion, { sass, babel, parallel } from '@windwalker-io/fusion';
+import fusion, { sass, babel, parallel, wait, ts } from '@windwalker-io/fusion';
 import { jsSync, installVendors } from '@windwalker-io/core';
 import path from 'path';
 import webpack from 'webpack';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 export async function css() {
   // Watch start
@@ -16,23 +10,37 @@ export async function css() {
   // Watch end
 
   // Compile Start
-  sass('scss/attachment.scss', 'dist/', { minify: 'separate_file' });
+  sass('scss/page-builder-admin.scss', 'dist/', { minify: 'separate_file' });
+  sass('scss/page.scss', 'dist/', { minify: 'separate_file' });
+  sass('scss/flag-icon.scss', 'dist/', { minify: 'separate_file' });
   // Compile end
 }
 
 export async function js() {
   // Watch start
-  fusion.watch('src/**/*.js');
+  fusion.watch('src/js/**/*.{js,mjs,ts}');
   // Watch end
 
   // Compile Start
-  babel('src/**/*.{js,mjs}', 'dist/', { module: 'systemjs' });
+  return wait(
+    babel('src/js/**/*.{js,mjs}', 'dist/', { module: 'systemjs' }),
+    ts(['src/js/**/*.ts', 'src/**/*.d.ts'], 'dist/', { tsconfig: './tsconfig.json' }),
+  );
   // Compile end
 }
+
+export * from './build/vue-tasks.mjs';
+import * as vueTasks from './build/vue-tasks.mjs';
+
+// compile vue
+export const vue = parallel(
+  ...Object.values(vueTasks)
+);
 
 export default parallel(
   css,
   js,
+  vue
 );
 
 /*
