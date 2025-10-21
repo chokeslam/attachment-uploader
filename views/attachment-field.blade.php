@@ -48,6 +48,7 @@ $insertBtn = $insertBtn ?? false;
 
 $options = [
     'accept' => $accept ?? false,
+    'mutiple' => $mutiple ?? false,
 ];
 
 $name ??= 'attachments';

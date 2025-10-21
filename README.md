@@ -40,6 +40,7 @@ php windwalker pkg:install lyrasoft/attachment -t migrations -t entity -t attach
     :items="$attachments"
     :insertBtn="true"
     :accept="'pdf,gif'"
+    :mutiple="true"
     >
 </x-attachment-field>
 ```
@@ -53,6 +54,7 @@ php windwalker pkg:install lyrasoft/attachment -t migrations -t entity -t attach
 | items     | true    | 提供已上傳檔案列表做使用
 | insertBtn | false   | 插入文章的btn，可以是 `true` 或 Tinymce element 的選擇器
 | accept    | false   | 限制檔案類型
+| mutiple   | false   | 可上傳複數檔案
 
 如果要單獨使用 檔案列表 或是 上傳Input的話 也可以單獨使用
 
@@ -62,24 +64,26 @@ php windwalker pkg:install lyrasoft/attachment -t migrations -t entity -t attach
 
 <!-- 一般使用，啟動插入文章功能。自訂 Tinymce id -->
 <!-- 插入 file-drag 專屬 options -->
-<x-attachment-field :options="$options" insertBtn="#input-item-content"></x-attachment-field>
+<x-attachment-field :accept="'pdf,gif'" :mutiple="true" insertBtn="#input-item-content"></x-attachment-field>
 
 <!-- 頁面上插入第二組時，可以自訂另一個 name -->
 <!-- id 也可以自訂，如果沒自訂，會用隨機碼，不會衝突 -->
 <x-attachment-field
     id="input-attachments-other"
     name="othert_attachments"
-    :options="$options" 
+    :accept="'pdf,gif'"
+    :mutiple="true"
     insertBtn="#input-item-content"></x-attachment-field>
 ```
 
-## CSS / JS
+## JS
 
-插入 attachment 元件後，就會自行插入，如果需要手動引入，可以下面程式碼
+在需要使用的頁面 ts中載入
 
-```php
-$asset->css('vendor/lyrasoft/attachment/dist/attachment.min.css');
-$asset->js('vendor/lyrasoft/attachment/dist/attachment.min.js');
+```js
+import { useFormkit } from '~vendor/lyrasoft/formkit/dist';
+
+useFormkit();
 ```
 
 
