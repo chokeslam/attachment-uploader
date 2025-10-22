@@ -80,7 +80,7 @@ php windwalker pkg:install lyrasoft/attachment -t migrations -t entity -t attach
 在需要使用的頁面 ts中 使用 `useAttachment()` 載入
 
 ```js
-import { useAttachment } from '@lyrasoft/attachment/dist';
+import { useAttachment } from '@lyrasoft/attachment';
 
 useAttachment();
 ```
