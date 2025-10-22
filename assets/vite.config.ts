@@ -1,8 +1,6 @@
-import vuePlugin from '@vitejs/plugin-vue';
 import { resolve } from 'node:path';
 import dts from 'unplugin-dts/vite';
 import { defineConfig } from 'vite';
-import fs from 'fs-extra';
 
 export default defineConfig(({ mode }) => {
 
