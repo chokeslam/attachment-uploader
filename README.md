@@ -63,7 +63,6 @@ php windwalker pkg:install lyrasoft/attachment -t migrations -t entity -t attach
 <x-attachment-field :items="$attachments" :insertBtn="true"></x-attachment-field>
 
 <!-- 一般使用，啟動插入文章功能。自訂 Tinymce id -->
-<!-- 插入 file-drag 專屬 options -->
 <x-attachment-field :accept="'pdf,gif'" :mutiple="true" insertBtn="#input-item-content"></x-attachment-field>
 
 <!-- 頁面上插入第二組時，可以自訂另一個 name -->
@@ -78,7 +77,7 @@ php windwalker pkg:install lyrasoft/attachment -t migrations -t entity -t attach
 
 ## JS
 
-在需要使用的頁面 ts中載入
+在需要使用的頁面 ts中 使用 `useAttachment()` 載入
 
 ```js
 import { useAttachment } from '~vendor/lyrasoft/formkit/dist';
